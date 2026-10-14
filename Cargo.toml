@@ -1,0 +1,21 @@
+[package]
+name = "diskscope"
+version = "0.1.0"
+edition = "2024"
+description = "Windows disk usage explorer with a treemap, drill-down and a list of the specific folders that hold the space"
+license = "Unlicense"
+repository = "https://github.com/aaljman/diskscope"
+
+[dependencies]
+eframe = "0.36.2"
+image = { version = "0.25", default-features = false, features = ["png"] }
+rayon = "1.12.0"
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_Storage_FileSystem", "Win32_Security", "Win32_System_Threading", "Win32_UI_Shell", "Win32_UI_WindowsAndMessaging", "Win32_System_Console", "Win32_System_Diagnostics_Debug", "Win32_System_IO", "Wdk_Foundation", "Wdk_Storage_FileSystem"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+# unwind, not abort: the scanner catches worker panics (catch_unwind in scan.rs) and keeps the app alive
+panic = "unwind"
+strip = true

@@ -1,0 +1,7 @@
+/target
+*.exe
+*.pdb
+*.panic.txt
+*.frames.txt
+*.error.txt
+__pycache__/
